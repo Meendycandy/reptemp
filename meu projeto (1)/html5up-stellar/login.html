@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #610b83, #a3288d , #993f96);
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column; align-items: center;
+      justify-content: center; height: 100vh;
+      color: #fff;
+      margin: 0;
+    }
+    .container {
+      background: rgba(255,255,255,0.15);
+      padding: 20px 30px; border-radius: 12px;
+      display: flex; flex-direction: column; align-items: center;
+      backdrop-filter: blur(10px);
+    }
+    .profile-container {
+      width: 120px; height: 120px;
+      border-radius: 50%; overflow: hidden;
+      margin-bottom: 10px; cursor: pointer;
+      border: 3px solid #fff;
+    }
+    .profile-container img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    input[type="file"] {
+      display: none;
+    }
+    input, button {
+      width: 100%; padding: 10px;
+      margin: 5px 0;
+      border: none; border-radius: 6px;
+    }
+    input {
+      background: rgba(255,255,255,0.8); color: #333;
+    }
+    button {
+      background: #7e0678; color: #e4d7d7;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #d81643;
+    }
+    .toggle {
+      background: none; border: none;
+      color: #fff; text-decoration: underline;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="form-title">Cadastro</h2>
+    <div class="profile-container" onclick="triggerFile()">
+      <img id="profileImage" src="https://via.placeholder.com/120" alt="Foto de perfil">
+    </div>
+    <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)">
+    <input type="text" placeholder="Nome de usuário">
+    <input type="email" placeholder="E‑mail">
+    <input type="password" placeholder="Senha">
+    <button id="submit-btn">Cadastrar</button>
+    <button class="toggle" onclick="toggleForm()">Já tem conta? Entrar</button>
+  </div>
+
+  <script>
+    function triggerFile() {
+      document.getElementById('imageUpload').click();
+    }
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = e => document.getElementById('profileImage').src = e.target.result;
+        reader.readAsDataURL(file);
+      }
+    }
+    let isLogin = false;
+    function toggleForm() {
+      isLogin = !isLogin;
+      document.getElementById('form-title').innerText = isLogin ? 'Login' : 'Cadastro';
+      document.getElementById('submit-btn').innerText = isLogin ? 'Entrar' : 'Cadastrar';
+    }
+  </script>
+</body>
+</html>

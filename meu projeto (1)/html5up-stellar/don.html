@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Baixa Me!</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #610b83, #a3288d, #993f96);
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      text-align: center;
+    }
+    .box {
+      background: rgba(255,255,255,0.15);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+      max-width: 320px;
+      width: 90%;
+      animation: fadeIn 1s ease-out;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+      border: none;
+      border-radius: 0.5rem;
+      background: linear-gradient(45deg, #75048b, #a30b45);
+      box-shadow: 0 5px 15px rgba(255,117,140,0.4);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255,117,140,0.6);
+    }
+    .btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 3px 10px rgba(255,117,140,0.4);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Frame Studio está pronto para voce!</h1>
+    <p>Clique no botão abaixo para baixar agora mesmo e começar a editar como uma diva!</p>
+    <button class="btn" id="downloadBtn">Baixar agora</button>
+  </div>
+
+  <script>
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      // Simulação de download: redirecione à URL real abaixo
+      const fileUrl = '/downloads/editor-photos.zip';
+      const link = document.createElement('a');
+      link.href = fileUrl;
+      link.download = '';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  </script>
+</body>
+</html>
