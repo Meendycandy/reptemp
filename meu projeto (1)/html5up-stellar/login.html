@@ -61,14 +61,28 @@
       <img id="profileImage" src="https://via.placeholder.com/120" alt="Foto de perfil">
     </div>
     <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)">
-    <input type="text" placeholder="Nome de usuário">
-    <input type="email" placeholder="E‑mail">
-    <input type="password" placeholder="Senha">
+    <input type="text" id="nome" placeholder="Nome de usuário">
+    <input type="email" id="email" placeholder="E‑mail">
+    <input type="password" id="senha" placeholder="Senha">
     <button id="submit-btn">Cadastrar</button>
     <button class="toggle" onclick="toggleForm()">Já tem conta? Entrar</button>
   </div>
 
   <script>
+    document.getElementById("submit-btn").addEventListener("click", async () => {
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const idade = 18;
+    });
+
+    const res = await fetch("/cadastro", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nome, email, idade })
+    });
+
+    const data = await res.json();
+    alert(data.message);
     function triggerFile() {
       document.getElementById('imageUpload').click();
     }
