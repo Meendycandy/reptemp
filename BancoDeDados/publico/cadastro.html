@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <style>
+    body {
+        background: linear-gradient(135deg, #610b83, #a3288d , #993f96);
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column; align-items: center;
+        justify-content: center; height: 100vh;
+        color: #fff;
+        margin: 0;
+      }
+      .container {
+        background: rgba(255,255,255,0.15);
+        padding: 20px 30px; border-radius: 12px;
+        display: flex; flex-direction: column; align-items: center;
+        backdrop-filter: blur(10px);
+      }
+      .profile-container {
+        width: 120px; height: 120px;
+        border-radius: 50%; overflow: hidden;
+        margin-bottom: 10px; cursor: pointer;
+        border: 3px solid #fff;
+      }
+      .profile-container img {
+        width: 100%; height: 100%; object-fit: cover;
+      }
+      input[type="file"] {
+        display: none;
+      }
+      input, button {
+        width: 100%; padding: 10px;
+        margin: 5px 0;
+        border: none; border-radius: 6px;
+      }
+      input {
+        background: rgba(255,255,255,0.8); color: #333;
+      }
+      button {
+        background: #7e0678; color: #e4d7d7;
+        font-weight: bold;
+      }
+      button:hover {
+        background: #d81643;
+      }
+      .toggle {
+        background: none; border: none;
+        color: #fff; text-decoration: underline;
+        margin-top: 10px;
+        cursor: pointer;
+      }
+</style>
+
+    <div class="container">
+        <h2 id="form-title">Login</h2>
+        <div class="profile-container" onclick="triggerFile()">
+          <img id="profileImage" src="https://via.placeholder.com/120" alt="Foto de perfil">
+        </div>
+        <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)">
+        <form id="cadastroForm">
+          <input type="text" name="nome" placeholder="Nome" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <input type="password" name="senha" placeholder="Senha" required />
+          <button type="submit">Cadastrar</button>
+        </form>
+        
+        <script>
+          document.getElementById("cadastroForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+        
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+        
+            const res = await fetch("/cadastro", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+        
+            const result = await res.json();
+            alert(result.message);
+          });
+        </script>
+        <script src="script.js"></script>
+</body>
+</html>
